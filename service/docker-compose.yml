@@ -1,0 +1,28 @@
+name: fastvuln
+
+services:
+  service:
+    build: .
+    ports:
+      - ${SERVICE_BIND:-}:${SERVICE_PORT:-9000}:9000
+    environment:
+      - MONGO_ENABLED=1
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - MONGO_USER=mongodb
+      - MONGO_PASSWORD=mongodb
+
+  mongodb:
+    image: mongo
+    volumes:
+      - mongodb:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongodb
+      MONGO_INITDB_ROOT_PASSWORD: mongodb
+
+volumes:
+  mongodb:
+
+networks:
+  default:
+    name: fastvuln

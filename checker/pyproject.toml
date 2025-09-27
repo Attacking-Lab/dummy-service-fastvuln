@@ -1,0 +1,12 @@
+[project]
+name = "checker"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "enochecker-core",
+    "enochecker3",
+]
+
+[tool.uv.sources]
+enochecker-core = { git = "https://github.com/attacking-lab/enochecker-core", rev = "v0.13.0" }
+enochecker3 = { git = "https://github.com/attacking-lab/enochecker3", rev = "v0.13.4" }

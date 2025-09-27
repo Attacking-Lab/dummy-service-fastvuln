@@ -1,0 +1,37 @@
+name: fastvuln-checker
+
+services:
+  checker:
+    build:
+      context: .
+      secrets:
+        - github-pat
+    ports:
+      - "${CHECKER_BIND:-}:${CHECKER_PORT:-8000}:8000"
+    environment:
+      - MONGO_ENABLED=1
+      - MONGO_HOST=mongo
+      - MONGO_PORT=27017
+      - MONGO_USER=mongo
+      - MONGO_PASSWORD=mongo
+      - CHECKER_PORT=${CHECKER_PORT:-8000}
+      - SERVICE_PORT=${SERVICE_PORT:-9000}
+
+  mongo:
+    image: mongo
+    volumes:
+      - mongodb:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+
+volumes:
+  mongodb:
+
+secrets:
+  github-pat:
+    environment: GITHUB_PAT
+
+networks:
+  default:
+    name: fastvuln-checker
