@@ -9,7 +9,7 @@ from os import environ
 
 checker_port = int(environ.get("CHECKER_PORT", 8000))
 service_port = int(environ.get("SERVICE_PORT", 9000))
-checker = Enochecker("dummy-http", service_port)
+checker = Enochecker("fastvuln", service_port)
 app = lambda: checker.app
 
 ACCEPT_JSON = {"Content-Type": "application/json", "Accept": "application/json"}
